@@ -1,0 +1,51 @@
+databaseChangeLog:
+- changeSet:
+    id: 1790855166475-1
+    author: shaman_stepan (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: phone_number
+            type: VARCHAR(255)
+        tableName: employee
+- changeSet:
+    id: 1790855166475-2
+    author: shaman_stepan (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: reason_dismissal
+            type: VARCHAR(255)
+        tableName: employee
+- changeSet:
+    id: 1790855166475-3
+    author: shaman_stepan (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: phone_number
+        constraintName: UC_EMPLOYEEPHONE_NUMBER_COL
+        tableName: employee
+- changeSet:
+    id: 1790855166475-4
+    author: shaman_stepan (generated)
+    changes:
+    - dropUniqueConstraint:
+        constraintName: uc_employeephonenumber_col
+        tableName: employee
+- changeSet:
+    id: 1790855166475-5
+    author: shaman_stepan (generated)
+    changes:
+    - dropColumn:
+        columnName: phoneNumber
+        tableName: employee
+- changeSet:
+    id: 1790855166475-6
+    author: shaman_stepan (generated)
+    changes:
+    - dropColumn:
+        columnName: reasonDismissal
+        tableName: employee
+

@@ -22,9 +22,10 @@ public class Employee {
     private String fio;
     @Column(unique = true)
     private String email;
-    @Column(unique = true)
+    @Column(unique = true, name = "phone_number")
     private String phoneNumber;
     @Enumerated(EnumType.STRING)
     private PostType post;
+    @Column(name = "reason_dismissal")
     private String reasonDismissal;
 }
