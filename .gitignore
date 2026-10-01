@@ -5,6 +5,12 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# Custom gitignore
+gradle.properties
+.env
+reports
+testdb.mv.db
+
 ### STS ###
 .apt_generated
 .classpath
