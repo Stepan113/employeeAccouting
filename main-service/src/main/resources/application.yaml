@@ -1,6 +1,9 @@
+server:
+  port: 8081
+
 spring:
   application:
-    name: employeeAccouting
+    name: main-service
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/employee}
     username: ${SPRING_DATASOURCE_USERNAME:admin}
