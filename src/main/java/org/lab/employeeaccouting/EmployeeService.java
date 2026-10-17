@@ -104,6 +104,9 @@ public class EmployeeService {
         if (employee.getReasonDismissal() != null) {
             throw new IllegalArgumentException("Сотрудник уже уволен!");
         }
+        if (reason == null || reason.isBlank()) {
+            throw new IllegalArgumentException("Причина не может быть пустой");
+        }
 
         employee.setReasonDismissal(reason);
     }
