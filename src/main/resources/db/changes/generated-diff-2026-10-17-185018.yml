@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1792248625925-1
+      author: shaman_stepan (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: employeePK
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  name: fio
+                  type: VARCHAR(255)
+              - column:
+                  name: phone_number
+                  type: VARCHAR(255)
+              - column:
+                  name: post
+                  type: VARCHAR(255)
+              - column:
+                  name: reason_dismissal
+                  type: VARCHAR(255)
+            tableName: employee
+
+      rollback:
+        - dropTable:
+            tableName: employee
+  - changeSet:
+      id: 1792248625925-2
+      author: shaman_stepan (generated)
+      changes:
+        - addUniqueConstraint:
+            columnNames: email
+            constraintName: UC_EMPLOYEEEMAIL_COL
+            tableName: employee
+      rollback:
+        - dropUniqueConstraint:
+            constraintName: UC_EMPLOYEEEMAIL_COL
+            tableName: employee
+  - changeSet:
+      id: 1792248625925-3
+      author: shaman_stepan (generated)
+      changes:
+        - addUniqueConstraint:
+            columnNames: phone_number
+            constraintName: UC_EMPLOYEEPHONE_NUMBER_COL
+            tableName: employee
+      rollback:
+        - dropUniqueConstraint:
+            constraintName: UC_EMPLOYEEPHONE_NUMBER_COL
+            tableName: employee
