@@ -8,6 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Service
 public class EmployeeService {
 
@@ -19,6 +22,13 @@ public class EmployeeService {
             final EmployeeMapper mapper) {
         this.rep = rep;
         this.mapper = mapper;
+    }
+
+    public Map<PostType, Long> createReport() {
+        return rep.countActiveByPost()
+                .stream()
+                .collect(Collectors.toMap(EmployeeRepository.PostCount::getPost,
+                        EmployeeRepository.PostCount::getTotal));
     }
 
     @Transactional
@@ -85,5 +95,19 @@ public class EmployeeService {
                     "Сотрудник с таким id не найден!");
         }
         rep.deleteById(id);
+    }
+
+    @Transactional
+    public void dismiss(final Long id, final String reason) {
+        final Employee employee = rep.findById(id).orElseThrow(() -> new EntityNotFoundException(
+                "Сотрудник с таким id не найден!"));
+        if (employee.getReasonDismissal() != null) {
+            throw new IllegalArgumentException("Сотрудник уже уволен!");
+        }
+        if (reason == null || reason.isBlank()) {
+            throw new IllegalArgumentException("Причина не может быть пустой");
+        }
+
+        employee.setReasonDismissal(reason);
     }
 }

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/employee")
 @Validated
@@ -92,5 +94,17 @@ public class EmployeeController {
     public void delete(
             @PathVariable final Long id) {
         service.delete(id);
+    }
+
+    @GetMapping("/report")
+    public Map<PostType, Long> report() {
+        return service.createReport();
+    }
+
+    @PostMapping("/dismiss/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void dismiss(@PathVariable final Long id,
+                        @RequestParam final String reason) {
+        service.dismiss(id, reason);
     }
 }
